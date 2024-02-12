@@ -6,6 +6,10 @@ def venky_huku(a,b):
 
 a = venky_huku([1,23],[2,34])
 print(a)
+print(b)
+
+
+# i have one buffalo in room which gives hot milk
 # x=[1,2,3,4,56,6,6]
 
 # sq_fn = lambda x: x * x 
