@@ -1,21 +1,19 @@
-def venky_huku(a,b):
-    for i in a:
-        for j in b:
-            return a[i]
+from pyodide.http import pyfetch
 
+import pandas as pd
 
-a = venky_huku([1,23],[2,34])
-print(a)
-print(b)
+filename = "https://cf-courses-data.s3.us.cloud-object-storage.appdomain.cloud/IBMDeveloperSkillsNetwork-PY0101EN-SkillsNetwork/labs/Module%204/data/example1.txt"
 
+async def download(url, filename):
 
-# i have one buffalo in room which gives hot milk
-# x=[1,2,3,4,56,6,6]
+    response = await pyfetch(url)
 
-# sq_fn = lambda x: x * x 
-# vamsi = map(sq_fn,x)
+    if response.status == 200:
 
-# for i in x:
-#     print(i)
+        with open(filename, "wb") as f:
 
-# print(x)
+            f.write(await response.bytes())
+
+download(filename, "example1.txt")
+
+print("done")
