@@ -40,3 +40,50 @@ with open("example.txt",'r') as readFile:
 with open("myfiles",'r') as readFile:
     print("Inactive Members: \n\n")
     print(readFile.read())
+
+
+def testMsg(passed):
+    if passed:
+       return 'Test Passed'
+    else :
+       return 'Test Failed'
+
+testWrite = "myfiles"
+testAppend = "example.txt"
+passed = True
+
+genFiles("myfiles","example.txt")
+
+with open("myfiles",'r') as file:
+    ogWrite = file.readlines()
+
+with open("example.txt",'r') as file:
+    ogAppend = file.readlines()
+
+try:
+    cleanFiles("myfiles",testAppend)
+except:
+    print('Error')
+
+with open("myfiles",'r') as file:
+    clWrite = file.readlines()
+
+with open("example.txt",'r') as file:
+    clAppend = file.readlines()
+        
+# checking if total no of rows is same, including headers
+
+if (len(ogWrite) + len(ogAppend) != len(clWrite) + len(clAppend)):
+    print("The number of rows do not add up. Make sure your final files have the same header and format.")
+    passed = False
+    
+for line in clWrite:
+    if  'no' in line:
+        passed = False
+        print("Inactive members in file")
+        break
+    else:
+        if line not in ogWrite:
+            print("Data in file does not match original file")
+            passed = False
+print ("{}".format(testMsg(passed)))
